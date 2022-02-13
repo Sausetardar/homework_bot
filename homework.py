@@ -95,7 +95,7 @@ def parse_status(homework):
     except KeyError as error:
         information = f'Нет ключа {error}'
         logger.error(information)
-        raise information
+        raise KeyError(information)
 
     verdict = HOMEWORK_STATUSES[homework_status]
 
