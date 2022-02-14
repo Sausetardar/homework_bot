@@ -65,26 +65,26 @@ def get_api_answer(current_timestamp):
         inf = f'Ответ сервера недоступен. Код ошибки {api_answer.status_code}'
         logger.error(inf)
         raise inf
-    return(api_answer.json())
+    return api_answer.json()
 
 
 def check_response(response):
     """Проверяет корректность данных API-сервиса Яндекс.Домашка."""
     try:
-        response['homeworks']
+        homework = response['homeworks']
         response['current_date']
     except KeyError:
         information = 'Отсутствует один из ключей'
         logger.error(information)
         raise information
     else:
-        if not isinstance(response['homeworks'], list):
+        if not isinstance(homework, list):
             information = 'Передан тип данных, не являющийся словарем'
             logger.error(information)
             raise information
-    if response['homeworks'] == []:
+    if homework == []:
         logger.debug('Новых изменений нет')
-    return response['homeworks']
+    return homework
 
 
 def parse_status(homework):
